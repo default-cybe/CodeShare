@@ -15,3 +15,35 @@ function generateCode() {
     return result;
   }
 let team_code =  generateCode();
+
+function activate() {
+
+    // Copy firebase-config.example.js to firebase-config.js and add your own
+    // Firebase project credentials. firebase-config.js is git-ignored.
+    const firebaseConfig = require("./firebase-config");
+    // @ts-ignore
+    firebase.initializeApp(firebaseConfig);
+    // @ts-ignore
+    const database = firebase.database();
+
+    vscode.commands.registerCommand('codeshare.sharecode', function () {
+        const editor = vscode.window.activeTextEditor;
+        if (!editor) {
+            return;
+        }
+        const text = editor.document.getText();
+        code = text;
+        vscode.env.clipboard.writeText(team_code);
+        console.log("copied")
+        database.ref(`teamCode/${team_code}`).set({
+            copiedcode: code
+        });
+
+        const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 100);
+        statusBarItem.text = "Team code (CodeShare): "+team_code;
+        statusBarItem.tooltip = "Team Code";
+        statusBarItem.show();
+
+        vscode.window.showInformationMessage(team_code +" is your CodeShare Team Code which is Already copied in you clipboard")
+    });
+
