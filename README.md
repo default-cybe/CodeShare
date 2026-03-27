@@ -22,3 +22,49 @@ There are two commands:
 
 Both commands are available from the Command Palette and the editor's right-click context menu.
 
+# Requirements
+
+* [Node.js](https://nodejs.org/) and npm
+* A [Firebase](https://firebase.google.com/) project with the Realtime Database enabled
+
+# Setup
+
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Add your Firebase credentials. Copy the example config and fill in your project's values:
+
+   ```bash
+   cp firebase-config.example.js firebase-config.js
+   ```
+
+   `firebase-config.js` is git-ignored so your credentials stay out of version control.
+
+# Running the extension
+
+* Open this folder in VS Code and press `F5` to launch an Extension Development Host with CodeShare loaded.
+* In the new window, open a file and run **Share Code (codeshare)** or **Receive Code (codeshare)** from the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) or the editor context menu.
+
+# Installing as a package
+
+To build a `.vsix` you can install locally or publish:
+
+```bash
+npm install -g @vscode/vsce
+vsce package
+```
+
+Then in VS Code run **Extensions: Install from VSIX...** and select the generated file.
+
+<h2>Share Code:</h2>
+<h2><img src="https://raw.githubusercontent.com/default-cybe/CodeShare/main/img/sharecode.gif"><br/></h2>
+<h2>Receive Code:</h2>
+<h2> <img src="https://raw.githubusercontent.com/default-cybe/CodeShare/main/img/receivecode.gif"><br/></h2>
+
+# License
+
+Released under the [MIT License](LICENSE).
+
